@@ -17,6 +17,10 @@ function getWeather(city) {
 
   request.open("GET", url, true);
   request.send();
+
+  request.addEventListener("readystatechange", function() {
+    console.log(this.readyState); //optional: visualize ready state go level 1-4
+  });
 }
 
 // UI Logic
