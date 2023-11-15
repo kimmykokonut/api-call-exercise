@@ -20,13 +20,13 @@ function getWeather(city) {
   request.open("GET", url, true);
   request.send();
 
-  request.addEventListener("readystatechange", function() {
-    console.log(this.readyState); //optional: visualize ready state go level 1-4
-  });
+  // request.addEventListener("readystatechange", function() {
+  //   console.log(this.readyState); //optional: visualize ready state go level 1-4
+  // });
 }
 
 // UI Logic
-function printError(request, city) {
+function printError(request, apiResponse, city) {
   document.querySelector('#showResponse').innerText = `There was an error accessing the weather data for ${city}:  ${request.status} ${request.statusText}: ${apiResponse.message}`;
 }
 
