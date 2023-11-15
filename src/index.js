@@ -1,33 +1,17 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
+import WeatherService from './weather-service.js';
 
 // Business Logic
 
 function getWeather(city) {
-  let promise = new Promise(function (resolve, reject) {
-    let request = new XMLHttpRequest();
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`;
-
-    request.addEventListener("loadend", function () {
-      const response = JSON.parse(this.responseText);
-      if (this.status === 200) {
-        resolve([response, city]); //could just resolve(response);
-      } else {
-        reject([this, response, city]); //could just reject(this);
-      }
-    });
-    request.open("GET", url, true);
-    request.send();
-  });
+  let promise = WeatherService.getWeather(city);
   promise.then(function (weatherDataArray) {
     printElements(weatherDataArray);
   }, function (errorArray) {
     printError(errorArray);
   });
-  // request.addEventListener("readystatechange", function() {
-  //   console.log(this.readyState); //optional: visualize ready state go level 1-4
-  // });
 }
 // UI Logic
 function printElements(data) {
