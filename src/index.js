@@ -4,15 +4,13 @@ import './css/styles.css';
 import WeatherService from './weather-service.js';
 
 // Business Logic
-function getWeather(city) {
-  WeatherService.getWeather(city)  //since this method returns a promise, can immediately call .then()
-    .then(function (response) {
-      if (response.main) { //this is the nesting for weather api-.main not true otehr api. asking if truthy.
-        printElements(response, city);
-      } else {
-        printError(response, city);
-      }
-    });
+async function getWeather(city) { //added async here
+  const response = await WeatherService.getWeather(city);
+  if (response.main) { //this is the nesting for weather api-.main not true otehr api. asking if truthy.
+    printElements(response, city);
+  } else {
+    printError(response, city);
+  }
 }
 // UI Logic
 function printElements(response, city) {
